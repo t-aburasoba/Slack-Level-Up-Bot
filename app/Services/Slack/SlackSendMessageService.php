@@ -6,7 +6,7 @@ class SlackSendMessageService
     public function sendMessage(string $message)
     {
         $headers = [
-            'Authorization: Bearer xoxb-771687717684-2959803310322-c07qPPiE4R9rUTgpyR9MJBjC', //（1)
+            'Authorization: Bearer xoxb-771687717684-2959803310322-t6mm1ZJMHkfiKKXRUtx5dwOj', //（1)
             'Content-Type: application/json;charset=utf-8'
         ];
         

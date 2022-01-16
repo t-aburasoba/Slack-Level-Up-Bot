@@ -45,7 +45,7 @@ class LevelUpService
         Log::info('今までの経験値は：' . $user->total_experiences);
         $totalExperience = $user->total_experiences + $experience;
         Log::info('経験値の合計は：' . $totalExperience);
-        $level = $this->getLevel($totalExperience, $user->level);
+        $level = $this->getLevel($totalExperience, $user);
         $data = [
             'total_experiences' => $totalExperience,
             'level' => $level
@@ -53,18 +53,18 @@ class LevelUpService
         return $this->userRepository->update($data, $slackId);
     }
 
-    public function getLevel($totalExperience, $level)
+    public function getLevel($totalExperience, $user)
     {
-        $nextLevel = $level + 1;
+        $nextLevel = $user->level + 1;
         Log::info("次のレベルは" . $nextLevel);
         $levelsExperience = $this->levelsExperienceRepository->getByLevel($nextLevel);
         $nextTotalExperience = $levelsExperience->total_experiences;
         Log::info('次のレベルアップに必要なのは' . $nextTotalExperience);
         if ($nextTotalExperience <= $totalExperience) {
             Log::info('レベルアップをしました');
-            $this->slackSendMessageService->sendMessage($nextLevel . 'にレベルアップしました!!!');
+            $this->slackSendMessageService->sendMessage($user->slack_id . ' のレベルが ' . $nextLevel . ' にアップしました!!!');
             return $nextLevel;
         }
-        return $level;
+        return $user->level;
     }
 }
