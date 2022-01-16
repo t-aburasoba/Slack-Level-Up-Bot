@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slack_id');
-            $table->unsignedBigInteger('total_experiences');
-            $table->unsignedInteger('level');
+            $table->unsignedBigInteger('total_experiences')->default(0);
+            $table->unsignedInteger('level')->default(1);
             $table->timestamps();
         });
     }

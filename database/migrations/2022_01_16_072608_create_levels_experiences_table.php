@@ -15,7 +15,7 @@ class CreateLevelsExperiencesTable extends Migration
     {
         Schema::create('levels_experiences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('level');
+            $table->unsignedInteger('level')->unique();
             $table->unsignedBigInteger('total_experiences');
             $table->timestamps();
         });
