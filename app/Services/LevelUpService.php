@@ -62,7 +62,7 @@ class LevelUpService
         Log::info('次のレベルアップに必要なのは' . $nextTotalExperience);
         if ($nextTotalExperience <= $totalExperience) {
             Log::info('レベルアップをしました');
-            $this->slackSendMessageService->sendMessage();
+            $this->slackSendMessageService->sendMessage($nextLevel . 'にレベルアップしました!!!');
             return $nextLevel;
         }
         return $level;
