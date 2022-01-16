@@ -35,7 +35,7 @@ class SlackController extends Controller
             Log::info('bot だよ');
             return '';
         }
-        $event =$input['event'];
+        $event = $input['event'];
         $this->slackService->levelUp($event);
         return '';
     }
