@@ -8,7 +8,7 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getBySlackId(string $slackId)
     {
-        $user = User::where('slack_id', $slackId)->first();
+        $user = User::firstOrCreate(['slack_id' => $slackId]);
         return $user;
     }
 

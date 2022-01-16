@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Services\Slack\SlackSendMessageService;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\LevelsExperience\LevelsExperienceRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 
 class LevelUpService
 {
@@ -40,10 +41,13 @@ class LevelUpService
     public function levelUp(string $slackId, int $experience)
     {
         $user = $this->userRepository->getBySlackId($slackId);
-        $totalExperience = $user->total_experience + $experience;
+        Log::info('今回の経験値は：' . $experience);
+        Log::info('今までの経験値は：' . $user->total_experiences);
+        $totalExperience = $user->total_experiences + $experience;
+        Log::info('経験値の合計は：' . $totalExperience);
         $level = $this->getLevel($totalExperience, $user->level);
         $data = [
-            'experience' => $totalExperience,
+            'total_experiences' => $totalExperience,
             'level' => $level
         ];
         return $this->userRepository->update($data, $slackId);
@@ -52,9 +56,12 @@ class LevelUpService
     public function getLevel($totalExperience, $level)
     {
         $nextLevel = $level + 1;
+        Log::info("次のレベルは" . $nextLevel);
         $levelsExperience = $this->levelsExperienceRepository->getByLevel($nextLevel);
-        $nextTotalExperience = $levelsExperience->total_experience;
+        $nextTotalExperience = $levelsExperience->total_experiences;
+        Log::info('次のレベルアップに必要なのは' . $nextTotalExperience);
         if ($nextTotalExperience <= $totalExperience) {
+            Log::info('レベルアップをしました');
             $this->slackSendMessageService->sendMessage();
             return $nextLevel;
         }

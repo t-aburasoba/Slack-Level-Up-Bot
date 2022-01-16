@@ -9,6 +9,6 @@ class SlackMessageService
     {
         Log::info($event['text']); // 入力したテキスト
         Log::info($event['user']); // 入力したユーザーの ID
-        return true;
+        return 1;
     }
 }

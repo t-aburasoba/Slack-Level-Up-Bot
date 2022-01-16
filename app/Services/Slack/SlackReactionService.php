@@ -10,6 +10,6 @@ class SlackReactionService
     {
         Log::info($event['reaction']); // 押されたリアクション
         Log::info($event['user']); // 入力したユーザーの ID
-        return true;
+        return 1;
     }
 }
