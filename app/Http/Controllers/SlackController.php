@@ -14,6 +14,9 @@ class SlackController extends Controller
         }
 
         $input = $request->input();
+        Log::info($input);
+        Log::info($input['event']['type']); // 'reaction_added' or 'message'
+        $input['event']['subtype']; //'message_changed' want to ignore
         Log::info($input['event']['text']); // 入力したテキスト
         Log::info($input['event']['user']); // 入力したユーザーの ID
         $isBot = $input['authorizations'][0]['is_bot'];
