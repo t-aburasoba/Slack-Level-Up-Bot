@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('slack_id');
             $table->unsignedBigInteger('total_experiences')->default(0);
             $table->unsignedInteger('level')->default(1);

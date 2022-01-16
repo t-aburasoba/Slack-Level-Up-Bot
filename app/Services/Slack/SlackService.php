@@ -3,6 +3,7 @@
 namespace App\Services\Slack;
 
 use App\Constants\SlackConst;
+use App\Services\LevelUpService;
 use Illuminate\Support\Facades\Log;
 
 class SlackService
@@ -16,17 +17,25 @@ class SlackService
      * @var $slackReactionService;
      */
     protected $slackReactionService;
+    
+    /**
+     * @var $levelUpService;
+     */
+    protected $levelUpService;
 
     /**
      * @param SlackMessageService $slackMessageService
      * @param SlackReactionService $slackReactionService
+     * @param LevelUpService $levelUpService
      */
     public function __construct(
         SlackMessageService $slackMessageService,
-        SlackReactionService $slackReactionService
+        SlackReactionService $slackReactionService,
+        LevelUpService $levelUpService
     ) {
         $this->slackMessageService = $slackMessageService;
         $this->slackReactionService = $slackReactionService;
+        $this->levelUpService = $levelUpService;
     }
 
     public function levelUp(array $event)
@@ -36,12 +45,19 @@ class SlackService
         Log::info($eventType . ' の ' . $eventSubType);
 
         if ($eventType === SlackConst::EVENT_MESSAGE && $eventSubType !== SlackConst::EVENT_MESSAGE_CHANGED) {
-            $this->slackMessageService->levelUpByMessage($event);
+            $experience = $this->slackMessageService->calculateExperience($event);
         } elseif ($eventType === SlackConst::EVENT_REACTION_ADDED) {
-            $this->slackReactionService->levelUpByReaction($event);
+            $experience = $this->slackReactionService->calculateExperience($event);
         } else {
             return false;
         }
+        $slackId = $event['user'];
+        $this->updateExperience($slackId, $experience);
         return true;
+    }
+
+    public function updateExperience(string $slackId, int $experience)
+    {
+        return $this->levelUpService->levelUp($slackId, $experience);
     }
 }

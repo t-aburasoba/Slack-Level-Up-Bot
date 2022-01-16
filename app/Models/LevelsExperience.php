@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class LevelsExperience extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,7 @@ class User extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'slack_id',
-        'total_experiences',
         'level',
+        'total_experiences',
     ];
 }
