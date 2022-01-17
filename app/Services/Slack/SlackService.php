@@ -44,7 +44,7 @@ class SlackService
         $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
         Log::info($eventType . ' の ' . $eventSubType);
 
-        if ($eventType === SlackConst::EVENT_MESSAGE && $eventSubType !== SlackConst::EVENT_MESSAGE_CHANGED) {
+        if ($eventType === SlackConst::EVENT_MESSAGE && $eventSubType !== SlackConst::EVENT_MESSAGE_CHANGED && $eventSubType !== SlackConst::EVENT_BOT_MESSAGE) {
             $experience = $this->slackMessageService->calculateExperience($event);
         } elseif ($eventType === SlackConst::EVENT_REACTION_ADDED) {
             $experience = $this->slackReactionService->calculateExperience($event);
