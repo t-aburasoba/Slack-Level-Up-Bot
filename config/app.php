@@ -232,4 +232,6 @@ return [
 
     ],
 
+    'slack-app-token' => env('SLACK_APP_TOKEN')
+
 ];
