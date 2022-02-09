@@ -16,9 +16,6 @@ class OAuthController extends Controller
         $code = $request->input('code');
         $state = $request->input('state');
 
-        if ($state != 'slalalala') {
-            return response('Something Wrong!', 500);
-        }
         if ($request->filled('error')) {
             return response('slack returned error.', 500);
         }
