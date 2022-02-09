@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\SlackController;
 
 /*
@@ -16,4 +17,6 @@ use App\Http\Controllers\SlackController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('top');
+
+Route::get('/slack/redirect', [OAuthController::class, 'redirect']);

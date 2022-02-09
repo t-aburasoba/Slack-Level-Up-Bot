@@ -231,6 +231,7 @@ return [
 
     ],
 
-    'slack-app-token' => env('SLACK_APP_TOKEN')
-
+    'slack-app-token' => env('SLACK_APP_TOKEN'),
+    'slack-client-id' => env('SLACK_CLIENT_ID'),
+    'slack-client-secret' => env('SLACK_CLIENT_SECRET')
 ];
