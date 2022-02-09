@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/receive', [SlackController::class, 'receiveMessage']);
+
+Route::get('/connect/slack', [SlackController::class, 'connect']);

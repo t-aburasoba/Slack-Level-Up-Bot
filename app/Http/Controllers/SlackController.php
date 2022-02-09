@@ -40,4 +40,9 @@ class SlackController extends Controller
         $this->slackService->levelUp($event);
         return '';
     }
+
+    public function checkLevel()
+    {
+        Log::info('level check をするよ');
+    }
 }
