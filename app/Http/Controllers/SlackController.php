@@ -54,6 +54,6 @@ class SlackController extends Controller
     public function checkLevel(Request $request)
     {
         $level = $this->levelCheckService->checkLevel($request->input('user_id'));
-        return response()->json(['text'=>$level]);
+        return response()->json(['text' => 'あなたのレベルは ' . $level . ' です。']);
     }
 }
