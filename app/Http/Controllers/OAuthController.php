@@ -10,7 +10,7 @@ class OAuthController extends Controller
     const SLACK_OAUTH_URL = 'https://slack.com/api/oauth.access';
 
     //Slackのredirect_urlからコールバックされるメソッド
-    public function auth(Request $request)
+    public function redirect(Request $request)
     {
         \Log::info($request);
         $code = $request->input('code');
