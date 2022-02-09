@@ -30,8 +30,9 @@ class SlackController extends Controller
         }
 
         $input = $request->input();
+        $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
         $isBot = $input['authorizations'][0]['is_bot'];
-        if ($isBot) {
+        if ($isBot || $eventSubType === SlackConst::EVENT_BOT_MESSAGE) {
             return '';
         }
         $event = $input['event'];
