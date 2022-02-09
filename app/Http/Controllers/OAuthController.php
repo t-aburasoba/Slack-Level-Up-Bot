@@ -32,9 +32,9 @@ class OAuthController extends Controller
 
         $response = $guzzle->post(self::SLACK_OAUTH_URL, $option);
         $body = $response->getBody();
-        \Log::info($body);
 
         $data = json_decode((String)$body, true);
+        \Log::info($data);
         if (!$data['ok']) {
             return response('OAuth request returns error!', 500);
         }
