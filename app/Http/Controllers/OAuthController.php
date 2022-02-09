@@ -39,10 +39,9 @@ class OAuthController extends Controller
             return response('OAuth request returns error!', 500);
         }
         $token = $data['access_token'];
-        $userName = $data['user']['name'];
-        $userId = $data['user']['id'];
-        $teamId = $data['team']['id'];
-        \Log::info([$token, $userName, $userId, $teamId]);
+        $userId = $data['authed_user']['id'];
+        $channelId = $data['incoming_webhook']['channel_id'];
+        \Log::info([$token, $userId, $channelId]);
 
         var_dump((String)$body);
 
