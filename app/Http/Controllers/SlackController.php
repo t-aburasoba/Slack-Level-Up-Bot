@@ -41,8 +41,12 @@ class SlackController extends Controller
         return '';
     }
 
-    public function checkLevel()
+    public function checkLevel(Request $request)
     {
-        Log::info('level check をするよ');
+        \Log::info($request->all());
+
+        $date = date('Y-m-d H:i:s');
+        $responseText = 'debug method are called at ' . $date;
+        return response()->json(['text'=>$responseText]);
     }
 }

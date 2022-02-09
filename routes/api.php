@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::any('receive', [SlackController::class, 'receiveMessage']);
-Route::any('check-level', [SlackController::class, 'checkLevel']);
+Route::post('level', [SlackController::class, 'checkLevel']);
