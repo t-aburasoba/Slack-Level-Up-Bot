@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Constants\SlackConst;
+use App\Services\LevelCheckService;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Services\Slack\SlackService;
@@ -16,12 +17,20 @@ class SlackController extends Controller
     protected $slackService;
 
     /**
+     * @var $levelCheckService;
+     */
+    protected $levelCheckService;
+
+    /**
      * @param SlackService $slackService
+     * @param LevelCheckService $levelCheckService
      */
     public function __construct(
-        SlackService $slackService
+        SlackService $slackService,
+        LevelCheckService $levelCheckService
     ) {
         $this->slackService = $slackService;
+        $this->levelCheckService = $levelCheckService;
     }
 
     public function receiveMessage(Request $request)
@@ -35,7 +44,7 @@ class SlackController extends Controller
         $event = $input['event'];
         $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
         $isBot = $input['authorizations'][0]['is_bot'];
-        if ($isBot || $eventSubType === SlackConst::EVENT_BOT_MESSAGE) {
+        if ($isBot || $eventSubType === SlackConst::EVENT_BOT_MESSAGE|| $eventSubType === SlackConst::EVENT_MESSAGE) {
             return '';
         }
         $this->slackService->levelUp($event);
@@ -44,10 +53,7 @@ class SlackController extends Controller
 
     public function checkLevel(Request $request)
     {
-        \Log::info($request->all());
-
-        $date = date('Y-m-d H:i:s');
-        $responseText = 'debug method are called at ' . $date;
-        return response()->json(['text'=>$responseText]);
+        $level = $this->levelCheckService->checkLevel($request->input('user_id'));
+        return response()->json(['text'=>$level]);
     }
 }
