@@ -17,7 +17,3 @@ use App\Http\Controllers\SlackController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/receive', [SlackController::class, 'receiveMessage']);
-
-Route::get('/connect/slack', [SlackController::class, 'connect']);
