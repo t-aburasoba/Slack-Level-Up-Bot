@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class OAuthController extends Controller
 {
-    const SLACK_OAUTH_URL = 'https://slack.com/api/oauth.access';
+    const SLACK_OAUTH_URL = 'https://slack.com/api/oauth.v2.access';
 
     //Slackのredirect_urlからコールバックされるメソッド
     public function redirect(Request $request)
