@@ -30,10 +30,8 @@ class SlackController extends Controller
         }
 
         $input = $request->input();
-        Log::info($input['authorizations']);
         $isBot = $input['authorizations'][0]['is_bot'];
         if ($isBot) {
-            Log::info('bot だよ');
             return '';
         }
         $event = $input['event'];
