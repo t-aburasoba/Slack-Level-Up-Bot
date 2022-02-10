@@ -38,15 +38,17 @@ class LevelUpService
         $this->slackSendMessageService = $slackSendMessageService;
     }
 
-    public function levelUp(string $slackId, int $experience)
+    public function levelUp(string $slackId, int $experience, string $teamId)
     {
         $user = $this->userRepository->getBySlackId($slackId);
+        $data = [];
+        if (!$user->workspace_id) {
+            $data['workspace_id'] = $teamId;
+        }
         $totalExperience = $user->total_experiences + $experience;
         $level = $this->getLevel($totalExperience, $user);
-        $data = [
-            'total_experiences' => $totalExperience,
-            'level' => $level
-        ];
+        $data['total_experiences'] = $totalExperience;
+        $data['level'] = $level;
         return $this->userRepository->update($data, $slackId);
     }
 

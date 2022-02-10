@@ -38,7 +38,7 @@ class SlackService
         $this->levelUpService = $levelUpService;
     }
 
-    public function levelUp(array $event)
+    public function levelUp(array $event, string $teamId)
     {
         $eventType = $event['type'];
         $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
@@ -51,12 +51,12 @@ class SlackService
             return false;
         }
         $slackId = $event['user'];
-        $this->updateExperience($slackId, $experience);
+        $this->updateExperience($slackId, $experience, $teamId);
         return true;
     }
 
-    public function updateExperience(string $slackId, int $experience)
+    public function updateExperience(string $slackId, int $experience, string $teamId)
     {
-        return $this->levelUpService->levelUp($slackId, $experience);
+        return $this->levelUpService->levelUp($slackId, $experience, $teamId);
     }
 }
