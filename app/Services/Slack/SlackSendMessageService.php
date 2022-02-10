@@ -9,13 +9,12 @@ class SlackSendMessageService
     {
         try {
             $headers = [
-                'Authorization: Bearer ' . config('app.slack-app-token'), //（1)
+                'Authorization: Bearer ' . config('app.slack-app-token'),
                 'Content-Type: application/json;charset=utf-8'
             ];
             
-            $url = "https://slack.com/api/chat.postMessage"; //(2)
+            $url = "https://slack.com/api/chat.postMessage";
             
-            //(3)
             $post_fields = [
                 "channel" => "#general",
                 "text" => $message,

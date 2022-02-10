@@ -28,7 +28,7 @@ class OAuthController extends Controller
         $params['client_secret'] = config('app.slack-client-secret');
 
         $option = [];
-        $option['form_params']=$params;
+        $option['form_params']= $params;
 
         $response = $guzzle->post(self::SLACK_OAUTH_URL, $option);
         $body = $response->getBody();
