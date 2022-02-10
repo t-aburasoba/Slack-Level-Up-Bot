@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\LevelsExperience\LevelsExperienceRepositoryInterface::class,
             \App\Repositories\LevelsExperience\LevelsExperienceRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Workspace\WorkspaceRepositoryInterface::class,
+            \App\Repositories\Workspace\WorkspaceRepository::class
+        );
     }
 
     /**
