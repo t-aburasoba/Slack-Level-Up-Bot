@@ -2,13 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Slack\WorkspaceService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class OAuthController extends Controller
 {
     const SLACK_OAUTH_URL = 'https://slack.com/api/oauth.v2.access';
 
+    /**
+     * @var $workspaceService;
+     */
+    protected $workspaceService;
+
+    /**
+     * @param WorkspaceService $workspaceService
+     */
+    public function __construct(
+        WorkspaceService $workspaceService
+    ) {
+        $this->workspaceService = $workspaceService;
+    }
     //Slackのredirect_urlからコールバックされるメソッド
     public function redirect(Request $request)
     {
@@ -43,10 +56,7 @@ class OAuthController extends Controller
         $channelId = $data['incoming_webhook']['channel_id'];
         \Log::info([$token, $userId, $channelId]);
 
-        var_dump((String)$body);
-
-        //この先でトークン情報をDBなどに保存しておくこと
-        //失うともう一度OAuthする必要がでてくる
+        $this->workspaceService->create($channelId, $token);
 
         //最後にLaravelのルールでViewの情報を返す。（今回はサンプルなのでOKだけ戻す）
         return redirect()->route('top');
