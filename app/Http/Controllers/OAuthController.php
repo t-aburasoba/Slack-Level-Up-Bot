@@ -25,7 +25,6 @@ class OAuthController extends Controller
     //Slackのredirect_urlからコールバックされるメソッド
     public function redirect(Request $request)
     {
-        \Log::info($request);
         $code = $request->input('code');
         $state = $request->input('state');
 
@@ -47,7 +46,6 @@ class OAuthController extends Controller
         $body = $response->getBody();
 
         $data = json_decode((String)$body, true);
-        \Log::info($data);
         if (!$data['ok']) {
             return response('OAuth request returns error!', 500);
         }

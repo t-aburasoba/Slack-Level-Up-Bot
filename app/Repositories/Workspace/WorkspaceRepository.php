@@ -18,4 +18,10 @@ class WorkspaceRepository implements WorkspaceRepositoryInterface
             ]
         );
     }
+
+    public function getWorkspaceId(string $teamId)
+    {
+        $workspace = Workspace::where('team_id', $teamId)->first();
+        return $workspace->id;
+    }
 }

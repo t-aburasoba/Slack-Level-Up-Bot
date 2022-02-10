@@ -1,10 +1,11 @@
 <?php
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
 use App\Services\Slack\SlackSendMessageService;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Workspace\WorkspaceRepositoryInterface;
 use App\Repositories\LevelsExperience\LevelsExperienceRepositoryInterface;
-use Illuminate\Support\Facades\Log;
 
 class LevelUpService
 {
@@ -24,13 +25,20 @@ class LevelUpService
     protected $slackSendMessageService;
 
     /**
+     * @var $workspaceRepository;
+     */
+    protected $workspaceRepository;
+
+    /**
      * @param UserRepositoryInterface $userRepository
      * @param LevelsExperienceRepositoryInterface $levelsExperienceRepository
+     * @param WorkspaceRepositoryInterface $workspaceRepository
      * @param SlackSendMessageService $slackSendMessageService
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
         LevelsExperienceRepositoryInterface $levelsExperienceRepository,
+        WorkspaceRepositoryInterface $workspaceRepository,
         SlackSendMessageService $slackSendMessageService
     ) {
         $this->userRepository = $userRepository;
@@ -43,7 +51,8 @@ class LevelUpService
         $user = $this->userRepository->getBySlackId($slackId);
         $data = [];
         if (!$user->workspace_id) {
-            $data['workspace_id'] = $teamId;
+            $workspaceId = $this->workspaceRepository->getWorkspaceId($teamId);
+            $data['workspace_id'] = $workspaceId;
         }
         $totalExperience = $user->total_experiences + $experience;
         $level = $this->getLevel($totalExperience, $user);
