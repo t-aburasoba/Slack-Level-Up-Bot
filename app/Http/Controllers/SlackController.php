@@ -40,6 +40,7 @@ class SlackController extends Controller
         }
 
         $input = $request->input();
+        Log::info($input);
 
         $event = $input['event'];
         $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
