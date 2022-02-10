@@ -40,7 +40,7 @@ class SlackController extends Controller
         }
 
         $input = $request->input();
-
+        $teamId = $input['team_id'];
         $event = $input['event'];
         $eventSubType = isset($event['subtype']) ? $event['subtype'] : null;
         $isBot = $input['authorizations'][0]['is_bot'];
