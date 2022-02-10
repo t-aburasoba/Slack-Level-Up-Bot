@@ -43,6 +43,7 @@ class LevelUpService
     ) {
         $this->userRepository = $userRepository;
         $this->levelsExperienceRepository = $levelsExperienceRepository;
+        $this->workspaceRepository = $workspaceRepository;
         $this->slackSendMessageService = $slackSendMessageService;
     }
 
