@@ -13,6 +13,7 @@ class Workspace extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'team_id',
         'channel_id',
         'access_token',
     ];

@@ -15,6 +15,7 @@ class CreateWorkspacesTable extends Migration
     {
         Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id');
             $table->string('channel_id');
             $table->text('access_token');
             $table->timestamps();

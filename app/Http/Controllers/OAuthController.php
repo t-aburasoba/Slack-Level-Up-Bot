@@ -52,10 +52,10 @@ class OAuthController extends Controller
             return response('OAuth request returns error!', 500);
         }
         $token = $data['access_token'];
-        $userId = $data['authed_user']['id'];
         $channelId = $data['incoming_webhook']['channel_id'];
+        $teamId = $data['team']['id'];
 
-        $this->workspaceService->create($channelId, $token);
+        $this->workspaceService->create($teamId, $channelId, $token);
 
         //最後にLaravelのルールでViewの情報を返す。（今回はサンプルなのでOKだけ戻す）
         return redirect()->route('top');

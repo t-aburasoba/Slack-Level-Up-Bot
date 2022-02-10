@@ -23,8 +23,8 @@ class WorkspaceService
         $this->workspaceRepository = $workspaceRepository;
     }
 
-    public function create(string $channelId, string $token)
+    public function create(string $teamId, string $channelId, string $token)
     {
-        $this->workspaceRepository->create($channelId, $token);
+        $this->workspaceRepository->create($teamId, $channelId, $token);
     }
 }
