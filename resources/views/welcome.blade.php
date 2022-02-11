@@ -61,10 +61,10 @@
                         <a href="https://twitter.com/aburasobablog" target="_blank">T.tsubasa</a>
                     </div>
                     <p class="lead mb-5">
-                        <span class="text-primary">現在 beta 版です。</span>
+                        <span class="text-primary">現在 beta 版です。データのリセット等が行われることがありますので予めご了承ください。</span>
                         <br>
                         Slack を盛り上げるためにゲーミフィケーションを導入しましょう。
-                        </br>
+                        <br>
                         Slack Levelup Bot を導入すると各ユーザーの投稿やリアクションに応じてレベルが上がります。
                     </p>
                     <div class="mb-5">
