@@ -3,6 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="{{ asset('images/ogp.png') }}">
+        <meta property="og:title" content="Slack Levelup Bot">
+        <meta property="og:description" content="Slack の投稿でユーザーのレベルが上がります。">
+        <meta property="og:locale" content="ja">
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
         <title>Slack Levelup bot</title>
 
