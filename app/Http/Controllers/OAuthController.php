@@ -55,7 +55,6 @@ class OAuthController extends Controller
 
         $this->workspaceService->create($teamId, $channelId, $token);
 
-        //最後にLaravelのルールでViewの情報を返す。（今回はサンプルなのでOKだけ戻す）
-        return redirect()->route('top');
+        return redirect('#thanks');
     }
 }
