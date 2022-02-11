@@ -13,7 +13,7 @@ class LevelUpService
      * @var $userRepository;
      */
     protected $userRepository;
-    
+
     /**
      * @var $levelsExperienceRepository;
      */
@@ -68,7 +68,7 @@ class LevelUpService
         $levelsExperience = $this->levelsExperienceRepository->getByLevel($nextLevel);
         $nextTotalExperience = $levelsExperience->total_experiences;
         if ($nextTotalExperience <= $totalExperience) {
-            $this->slackSendMessageService->sendMessage('<@' . $user->slack_id . '> のレベルが ' . $nextLevel . ' にアップしました !!!');
+            $this->slackSendMessageService->sendMessage('<@' . $user->slack_id . '> のレベルが ' . $nextLevel . ' にアップしました !!!', $user->workspace->channel_id, $user->token);
             return $nextLevel;
         }
         return $user->level;

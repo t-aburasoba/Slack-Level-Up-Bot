@@ -5,22 +5,22 @@ use Illuminate\Support\Facades\Log;
 
 class SlackSendMessageService
 {
-    public function sendMessage(string $message)
+    public function sendMessage(string $message, string $channelId, string $token)
     {
         try {
             $headers = [
-                'Authorization: Bearer ' . config('app.slack-app-token'),
+                'Authorization: Bearer ' . $token,
                 'Content-Type: application/json;charset=utf-8'
             ];
-            
+
             $url = "https://slack.com/api/chat.postMessage";
-            
+
             $post_fields = [
-                "channel" => "#general",
+                "channel" => $channelId,
                 "text" => $message,
                 "as_user" => true
             ];
-            
+
             $options = [
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -28,13 +28,13 @@ class SlackSendMessageService
                 CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => json_encode($post_fields)
             ];
-            
+
             $ch = curl_init();
-            
+
             curl_setopt_array($ch, $options);
-            
+
             $result = curl_exec($ch);
-            
+
             return curl_close($ch);
         } catch (error $e) {
             Log::error($e->getMessage());
