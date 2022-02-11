@@ -58,7 +58,7 @@
                     </h1>
                     <div class="subheading mb-5">
                         created by
-                        <a href="https://twitter.com/aburasobablog" target="_blank">@aburasoba</a>
+                        <a href="https://twitter.com/aburasobablog" target="_blank">T.tsubasa</a>
                     </div>
                     <p class="lead mb-5">
                         <span class="text-primary">現在 beta 版です。</span>
