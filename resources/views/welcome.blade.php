@@ -50,6 +50,9 @@
             <!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
+                    @if (session('message'))
+                        <h3 class="text-primary">{{ session('message') }}</h3>
+                    @endif
                     <h1 class="mb-0">
                         Slack
                         <span class="text-primary">Level up bot</span>

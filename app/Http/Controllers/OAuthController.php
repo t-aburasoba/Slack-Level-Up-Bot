@@ -55,6 +55,6 @@ class OAuthController extends Controller
 
         $this->workspaceService->create($teamId, $channelId, $token);
 
-        return redirect('#thanks');
+        return redirect()->route('top')->with('message', 'Thank you for installing');
     }
 }
