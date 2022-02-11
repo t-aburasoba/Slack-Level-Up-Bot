@@ -8,7 +8,7 @@ class WorkspaceRepository implements WorkspaceRepositoryInterface
 {
     public function create(string $teamId, string $channelId, string $token)
     {
-        return Workspace::firstOrCreate(
+        return Workspace::updateOrCreate(
             [
                 'team_id' => $teamId
             ],
