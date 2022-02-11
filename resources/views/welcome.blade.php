@@ -9,6 +9,7 @@
         <meta property="og:title" content="Slack Levelup Bot">
         <meta property="og:description" content="Slack の投稿でユーザーのレベルが上がります。">
         <meta property="og:locale" content="ja">
+        <meta name="twitter:card" content="summary_large_image">
         <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
         <title>Slack Levelup bot</title>
