@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\LevelUpService;
 use Illuminate\Http\Request;
 use App\Constants\SlackConst;
 use App\Services\LevelCheckService;
@@ -22,20 +23,28 @@ class SlackController extends Controller
     protected $levelCheckService;
 
     /**
+     * @var $levelUpService;
+     */
+    protected $levelUpService;
+
+    /**
      * @param SlackService $slackService
      * @param LevelCheckService $levelCheckService
+     * @param LevelUpService $levelUpService
      */
     public function __construct(
         SlackService $slackService,
-        LevelCheckService $levelCheckService
+        LevelCheckService $levelCheckService,
+        LevelUpService $levelUpService
     ) {
         $this->slackService = $slackService;
         $this->levelCheckService = $levelCheckService;
+        $this->levelUpService = $levelUpService;
     }
 
     public function receiveMessage(Request $request)
     {
-        if ($request->input('type') == 'url_verification') {
+        if ($request->input('type') === 'url_verification') {
             return $request->input('challenge');
         }
 
@@ -54,7 +63,11 @@ class SlackController extends Controller
 
     public function checkLevel(Request $request)
     {
-        $level = $this->levelCheckService->checkLevel($request->input('user_id'));
-        return response()->json(['text' => 'あなたのレベルは ' . $level . ' です。']);
+        list($level, $experience) = $this->levelCheckService->checkLevelAndExperience($request->input('user_id'));
+        $nextTotalExperience = $this->levelUpService->getNextTotalExperience($level);
+        $needExperienceToNextLevel = $nextTotalExperience - $experience;
+        return response()->json([
+            'text' => 'あなたのレベルは ' . $level . ' です。次のレベルアップには ' . $needExperienceToNextLevel . ' 経験値必要です。'
+        ]);
     }
 }

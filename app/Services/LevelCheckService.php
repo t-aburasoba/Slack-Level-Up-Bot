@@ -12,7 +12,7 @@ class LevelCheckService
      * @var $userRepository;
      */
     protected $userRepository;
-    
+
     /**
      * @var $levelsExperienceRepository;
      */
@@ -38,9 +38,9 @@ class LevelCheckService
         $this->slackSendMessageService = $slackSendMessageService;
     }
 
-    public function checkLevel(string $userId)
+    public function checkLevelAndExperience(string $userId)
     {
         $user = $this->userRepository->getBySlackId($userId);
-        return $user->level;
+        return [$user->level, $user->total_experiences];
     }
 }

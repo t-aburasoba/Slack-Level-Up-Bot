@@ -56,21 +56,20 @@ class LevelUpService
             $data['workspace_id'] = $workspaceId;
         }
         $totalExperience = $user->total_experiences + $experience;
-        $level = $this->getLevel($totalExperience, $user);
+        $nextTotalExperience = $this->getNextTotalExperience($user->level);
+        $level = $user->level;
+        if ($nextTotalExperience <= $totalExperience) {
+            $level = $user->level + 1;
+            $this->slackSendMessageService->sendMessage('<@' . $user->slack_id . '> のレベルが ' . $level . ' にアップしました !!!', $user->workspace->channel_id, $user->workspace->access_token);
+        }
         $data['total_experiences'] = $totalExperience;
         $data['level'] = $level;
         return $this->userRepository->update($data, $slackId);
     }
 
-    public function getLevel($totalExperience, $user)
+    public function getNextTotalExperience(int $level)
     {
-        $nextLevel = $user->level + 1;
-        $levelsExperience = $this->levelsExperienceRepository->getByLevel($nextLevel);
-        $nextTotalExperience = $levelsExperience->total_experiences;
-        if ($nextTotalExperience <= $totalExperience) {
-            $this->slackSendMessageService->sendMessage('<@' . $user->slack_id . '> のレベルが ' . $nextLevel . ' にアップしました !!!', $user->workspace->channel_id, $user->workspace->access_token);
-            return $nextLevel;
-        }
-        return $user->level;
+        $nextLevel = $level + 1;
+        return $this->levelsExperienceRepository->getByLevel($nextLevel)->total_experiences;
     }
 }
