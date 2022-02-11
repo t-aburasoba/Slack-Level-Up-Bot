@@ -39,6 +39,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#how-to-use">How to use</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#demo">Demo</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#who-is-me">Who is me</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#thanks">Thanks</a></li>
@@ -82,7 +83,7 @@
                 </div>
             </section>
             <hr class="m-0" />
-            <!-- Experience-->
+            <!-- How to use -->
             <section class="resume-section" id="how-to-use">
                 <div class="resume-section-content">
                     <h2 class="mb-5">How to use</h2>
@@ -115,6 +116,16 @@
                             <p>Slack での活動が活発になるような仕組みをどんどん開発していきます。ご要望等ございましたら <a href="https://twitter.com/aburasobablog" target="_blank">Twitter</a> からお問い合わせください。</p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">STEP ?</span></div>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Demo -->
+            <section class="resume-section" id="demo">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Demo</h2>
+                    <div class="movie-wrap">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_nzWejdY710" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
