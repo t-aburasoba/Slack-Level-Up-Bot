@@ -57,10 +57,12 @@
                         Slack
                         <span class="text-primary">Level up bot</span>
                     </h1>
-                    <div class="subheading mb-5">
-                        created by
-                        <a href="https://twitter.com/aburasobablog" target="_blank">@aburasoba</a>
-                    </div>
+                        @unless (session('message'))
+                            <div class="subheading mb-5">
+                                created by
+                                <a href="https://twitter.com/aburasobablog" target="_blank">@aburasoba</a>
+                            </div>
+                        @endunless
                     <p class="lead mb-5">
                         Slack を盛り上げるためにゲーミフィケーションを導入しましょう。</br>Slack Levelup Bot を導入すると各ユーザーの投稿やリアクションに応じてレベルが上がります。
                     </p>
