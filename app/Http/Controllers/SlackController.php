@@ -47,7 +47,6 @@ class SlackController extends Controller
         if ($isBot || $eventSubType === SlackConst::EVENT_BOT_MESSAGE || $eventSubType === SlackConst::EVENT_MESSAGE) {
             return '';
         }
-        Log::info('kitemasuyo');
         $this->slackService->levelUp($event, $teamId);
         return '';
     }
